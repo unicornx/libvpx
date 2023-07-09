@@ -861,6 +861,10 @@ process_common_toolchain() {
       soft_enable lasx
       enable_feature loongarch
       ;;
+    riscv64*)
+      soft_enable rvv
+      enable_feature riscv64
+      ;;
   esac
 
   # PIC is probably what we want when building shared libs
@@ -1457,6 +1461,11 @@ EOF
       enabled lsx && soft_enable runtime_cpu_detect
       enabled lasx && check_inline_asm lasx '"xvadd.b $xr0, $xr1, $xr1"'
       enabled lasx && soft_enable runtime_cpu_detect
+      ;;
+    riscv64*)
+      link_with_cc=gcc
+      enable_feature gcc
+      setup_gnu_toolchain
       ;;
     *-gcc|generic-gnu)
       link_with_cc=gcc
