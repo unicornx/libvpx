@@ -11,11 +11,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <asm/cputable.h>
-#include <linux/auxvec.h>
 
 #include "./vpx_config.h"
-#include "vpx_ports/ppc.h"
+#include "vpx_ports/riscv.h"
 
 #if CONFIG_RUNTIME_CPU_DETECT
 static int cpu_env_flags(int *flags) {
@@ -51,5 +49,5 @@ int riscv_cpu_caps(void) {
 #else
 // If there is no RTCD the function pointers are not used and can not be
 // changed.
-int ppc_simd_caps(void) { return 0; }
+int riscv_cpu_caps(void) { return 0; }
 #endif  // CONFIG_RUNTIME_CPU_DETECT
